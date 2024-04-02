@@ -1,0 +1,21 @@
+<div *ngIf="table" class="table-container" [style.--nb-cols]="nbDisplayedColumns"
+  [style.--column-template]="table.columnTemplate">
+  <div class="table-grid">
+    <div class="header cell action" *ngIf="table.selectable" [class.sticky-top]="table.stickyHeader"  [class.sticky-left]="table.stickySelection"><input type="checkbox" /></div>
+    <div class="header cell" *ngFor="let column of table.columns" [class.sticky-top]="table.stickyHeader" >
+      {{column.name}}</div>
+    <div class="header cell action" *ngIf="table.expandable" [class.sticky-top]="table.stickyHeader" [class.sticky-right]="table.stickyExpandable"></div>
+    <ng-container *ngFor="let cell of cells; trackBy: trackByCell; let idx = index">
+      <div class="cell action" *ngIf="table.selectable && (idx%nbDataColumns) === 0" [class.sticky-left]="table.stickySelection">
+        <input type="checkbox" />
+      </div>
+      <div class="cell"  [class.sticky-right]="cell.stickyRight" [class.sticky-left]="cell.stickyLeft">
+        {{cell.value}}</div>
+      <div class="cell action" *ngIf="table.expandable && ((idx+1)%nbDataColumns) === 0" [class.sticky-right]="table.stickyExpandable">
+        +
+      </div>
+      <div class="cell expanded" *ngIf="table.expandable && ((idx+1)%nbDataColumns) === 0">
+        This is the expanded content
+      </div>
+    </ng-container>
+  </div>

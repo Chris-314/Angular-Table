@@ -1,0 +1,8 @@
+<div class="client-table">
+  <button (click)="remove($event)">Remove</button>
+  <button (click)="add($event)">Add</button>
+  <app-table [data]="data" [configuration]="conf"></app-table>
+</div>
+<pre class="client-preview">
+  {{data | json }}
+</pre>
